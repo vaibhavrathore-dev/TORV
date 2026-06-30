@@ -26,10 +26,12 @@ def get_current_user(token : str = Depends(oauth2_scheme)):
     except JWTError:
         raise HTTPException(status_code=401 , detail = "Invalid Token or Session Expired")
     
-def admin_required(role : str = Depends(get_current_user)):
+def admin_required(role = Depends(get_current_user)):
     if role["role"] != "admin":
         raise HTTPException(status_code=403,detail = "Only allowed for admin")
     else:
         return {
-            "message" : "Acess granted"
+            "message" : "Acess granted"\
         }
+    
+
